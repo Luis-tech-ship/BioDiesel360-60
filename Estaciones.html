@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Estaciones</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">
+            <img src="Img/logo.jpg" alt="logo_BioDiesel">
+            <h2 class="nom-empresa">BioDiesel360-60 
+                <span>ADMINISTRADOR</span></h2>
+        </a>
+        <nav>
+            <a href="Estaciones.html" class="nav-lin">Consulta Estaciones</a>
+            <a href="Diesel.html" class="nav-lin">Consulta Diésel</a>
+        </nav>
+    </header>
+    <section>
+        <h2>Consulta de Estaciones</h2>
+
+        <!-- Tabla de Estaciones -->
+        <table id="tabla-estaciones" border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Estación</th>
+                    <th>Domicilio</th>
+                    <th>Correo</th>
+                    <th>Productos</th>
+                    <th>Contacto</th>
+                    <th>Teléfono</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-body">
+                <!-- Las filas se agregarán aquí dinámicamente -->
+            </tbody>
+        </table>
+    </section>
+    <footer>
+        <p class="textfoot">
+            Rio Culiacán sin número | Tel. 4428952834 | Correo: lm6936945@gmail.com | Creado por Alumnos de El Marqués
+        </p>
+    </footer>
+
+    <script>
+        
+        fetch('Estaciones.xml')
+            .then(response => response.text())
+            .then(data => {
+                
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(data, "text/xml");
+                const ubicaciones = xmlDoc.getElementsByTagName('ubicacion');
+                const tablaBody = document.getElementById('tabla-body');
+
+                
+                for (let i = 0; i < ubicaciones.length; i++) {
+                    const id = ubicaciones[i].getElementsByTagName('id')[0].textContent;
+                    const estacion = ubicaciones[i].getElementsByTagName('estacion')[0].textContent;
+                    const domicilio = ubicaciones[i].getElementsByTagName('domicilio')[0].textContent;
+                    const correo = ubicaciones[i].getElementsByTagName('correo')[0].textContent;
+                    const productos = ubicaciones[i].getElementsByTagName('productos')[0].textContent;
+                    const contacto = ubicaciones[i].getElementsByTagName('contacto')[0].textContent;
+                    const telefono = ubicaciones[i].getElementsByTagName('telefono')[0].textContent;
+
+                   
+                    const nuevaFila = `
+                        <tr>
+                            <td>${id}</td>
+                            <td>${estacion}</td>
+                            <td>${domicilio}</td>
+                            <td>${correo}</td>
+                            <td>${productos}</td>
+                            <td>${contacto}</td>
+                            <td>${telefono}</td>
+                        </tr>
+                    `;
+                    tablaBody.innerHTML += nuevaFila; 
+                }
+            })
+            .catch(error => console.error('Error cargando el XML:', error));
+    </script>
+</body>
+</html>
+
+

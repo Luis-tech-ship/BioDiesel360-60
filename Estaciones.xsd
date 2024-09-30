@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="https://www.w3.org/2001/XMLSchema">
+        <xs:element name="domicilio">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="estaciones" maxOccurs="unbounded">
+                    <xs:complexType mixed="true">
+                        <xs:sequence>
+                            <xs:element name="id" type="xs:string"/>
+                            <xs:element name="estacion" type="xs:string"/>
+                            <xs:element name="domicilio" type="xs:string"/>
+                            <xs:element name="correo" type="xs:string"/>
+                            <xs:element name="productos" type="xs:string"/>
+                            <xs:element name="contacto" type="xs:string"/>
+                            <xs:element name="telefono" type="xs:string"/>                        
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

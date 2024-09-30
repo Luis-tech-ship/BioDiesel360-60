@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioDiesel360-60</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">
+            <img src="Img/logo.jpg" alt="logo_BioDiesel">
+            <h2 class="nom-empresa">BioDiesel360-60 
+                <span>ADMINISTRADOR</span></h2>
+        </a>
+        <nav>
+            <a href="Estaciones.html" class="nav-lin">Consulta Estaciones</a>
+            <a href="Diesel.html" class="nav-lin">Consulta Diésel</a>
+        </nav>
+    </header>
+    <section>
+        <h2>Bienvenido Administrador!</h2>
+        <p>Esta plataforma es exclusiva para uso administrativo y debe ser utilizada con responsabilidad. Asegúrense de no compartir información sensible y de seguir las políticas de seguridad establecidas. Cualquier actividad sospechosa o no autorizada será investigada y podría tener consecuencias. Su colaboración es esencial para mantener la integridad de nuestro sistema.</p>
+
+        <!-- Búsqueda de Diésel -->
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar Diésel por ID o Nombre de Diésel..." class="search-input">
+            <button class="search-button" onclick="buscarDiesel()">Buscar Diésel</button>
+        </div>
+
+        <div id="resultados"></div>
+
+        <!-- Búsqueda de Estaciones -->
+        <div class="search-container">
+            <input type="text" id="search-estaciones" placeholder="Buscar Estación por ID o Nombre..." class="search-input">
+            <button class="search-button" onclick="buscarEstaciones()">Buscar Estaciones</button>
+        </div>
+
+        <div id="resultados-estaciones"></div>
+    </section>
+    <footer>
+        <p class="textfoot">
+            Rio Culiacán sin número | Tel. 4428952834 | Correo: lm6936945@gmail.com | Creado por Alumnos de El Marqués
+        </p>
+    </footer>
+
+    <script>
+        // Datos de los diéseles
+        const dieselData = [
+            { "id": 1, "nombre": "Biodiésel A", "tipoDiesel": "Biodiésel de Aceite Vegetal", "descripcion": "Biodiésel producido a partir de aceite vegetal usado.", "composicionQuimica": "Ésteres metílicos de ácidos grasos (FAME)", "precioPorLitro": 20.50 },
+            { "id": 2, "nombre": "Biodiésel B", "tipoDiesel": "Biodiésel de Grasa Animal", "descripcion": "Biodiésel generado mediante el procesamiento de grasa animal.", "composicionQuimica": "Ésteres metílicos de ácidos grasos (FAME)", "precioPorLitro": 21.00 },
+            { "id": 3, "nombre": "Diésel Sintético", "tipoDiesel": "Diésel Sintético", "descripcion": "Diésel producido mediante procesos químicos como la licuefacción de carbón o la conversión de gas a líquido.", "composicionQuimica": "Hidrocarburos sintéticos (parafinas, olefinas, naftenos y aromáticos)", "precioPorLitro": 23.50 },
+            { "id": 4, "nombre": "Diésel Estándar", "tipoDiesel": "Diésel de Petróleo", "descripcion": "Diésel convencional derivado del petróleo crudo, utilizado en motores de combustión interna.", "composicionQuimica": "Hidrocarburos (parafinas, olefinas, naftenos y aromáticos)", "precioPorLitro": 22.00 },
+            { "id": 5, "nombre": "Hidrobiodiésel (HVO)", "tipoDiesel": "Aceite Vegetal Hidrotratado", "descripcion": "Biocombustible producido a partir de aceites vegetales hidrotratados, como el aceite de cocina usado. Es más eficiente y sostenible que el diésel tradicional.", "composicionQuimica": "Hidrocarburos de cadena larga, mayormente parafinas", "precioPorLitro": 24.00 },
+            { "id": 6, "nombre": "Biogás", "tipoDiesel": "Gas Renovable", "descripcion": "Gas renovable producido mediante la descomposición anaeróbica de materia orgánica, como residuos agrícolas y desechos alimentarios. El componente principal es el metano.", "composicionQuimica": "Metano (CH4), dióxido de carbono (CO2), y otros gases en menor proporción", "precioPorLitro": "Variable (depende de la conversión energética)" },
+            { "id": 7, "nombre": "Bioetanol", "tipoDiesel": "Biocombustible a base de etanol", "descripcion": "Biocombustible obtenido mediante la fermentación de materiales ricos en azúcares o almidones, como maíz o caña de azúcar. Se usa principalmente como aditivo en la gasolina.", "composicionQuimica": "Etanol (C2H5OH)", "precioPorLitro": 18.50 },
+            { "id": 8, "nombre": "Biobutanol", "tipoDiesel": "Biocombustible a base de butanol", "descripcion": "Biocombustible obtenido mediante la fermentación de materiales orgánicos, como residuos agrícolas. Tiene una mayor densidad energética y es más fácil de almacenar que otros biocombustibles.", "composicionQuimica": "Butanol (C4H9OH)", "precioPorLitro": 25.00 },
+            { "id": 9, "nombre": "Biometano", "tipoDiesel": "Gas Renovable Puro", "descripcion": "Gas renovable derivado del biogás, más puro y con mayor eficiencia. Puede mezclarse con gas natural convencional para generar electricidad o propulsar vehículos.", "composicionQuimica": "Metano (CH4) casi puro", "precioPorLitro": "Variable (según conversión energética)" },
+            { "id": 10, "nombre": "Biodiésel Marino", "tipoDiesel": "Biodiésel para Embarcaciones", "descripcion": "Un tipo de biodiésel formulado específicamente para su uso en motores marinos, que permite reducir las emisiones contaminantes en alta mar.", "composicionQuimica": "Ésteres metílicos de ácidos grasos (FAME) con aditivos para ambientes marinos", "precioPorLitro": 26.50 }
+        ];
+
+        // Datos de las estaciones
+		const estacionesData = [
+            { "id": "12345", "estacion": "Amazacala", "domicilio": "Carretera estatal 500 # 1523 San Jose Amazacala", "correo": "amazacala@biodiesel.com", "productos": "Biodiesel A, Biodiesel B, Biogas", "contacto": "Damian Robles", "telefono": "442 123 4567" },
+            { "id": "12346", "estacion": "La Griega", "domicilio": "Carretera estatal 500 # 105 Parque Industrial Beta la griega", "correo": "griega@biodiesel.com", "productos": "Biodiesel A, Hidrobiodiesel, Biogas", "contacto": "Gerardo Gonzalez", "telefono": "442 123 4568" },
+            { "id": "12347", "estacion": "Chichimequillas", "domicilio": "Carretera estatal 540 # 955 Santa Maria Begoña", "correo": "cheme@biodiesel.com", "productos": "Biodiesel A, Biodiesel B, Hidrobiodiesel", "contacto": "Axel Gracia", "telefono": "442 123 4587" },
+            { "id": "12348", "estacion": "El Refugio", "domicilio": "Fray Junipero Serra 900 Km 6 El Regugio", "correo": "elrefugio@biodiesel.com", "productos": "Biodiesel A, Biodiesel B, Biogas", "contacto": "Damian Robles", "telefono": "442 123 4567" },
+            { "id": "12349", "estacion": "Juriquilla", "domicilio": "Av de las ciencias 2060 Juriquilla", "correo": "juriquilla@biodiesel.com", "productos": "Biodiesel A, Biodiesel B, Biogas, Bioetanol, Biometano", "contacto": "Cecilia Balderas", "telefono": "442 123 4577" },
+            { "id": "54321", "estacion": "PIBQ", "domicilio": "Carretera México - Querétaro 5D # 408 Parque Industrial Bernardo Quintana", "correo": "pibq@biodiesel.com", "productos": "Biodiesel A, Biodiesel B, Hidrobiodiesel,Biogas, Biobutanol, Bioetanol, Biometano, Diesel estándar, Diesel sintético", "contacto": "Leonardo Anaya", "telefono": "442 123 4577" },
+            { "id": "64321", "estacion": "PIB", "domicilio": "Carretera Querétaro - Celaya Km8 +800 Parque Industrial Balvanera", "correo": "pib@biodiesel.com", "productos": "Biodiesel A, Biodiesel B, Hidrobiodiesel,Biogas, Biobutanol, Bioetanol, Biometano, Diesel estándar, Diesel sintético", "contacto": "Margarita Reyes", "telefono": "442 321 1257" },
+            { "id": "74321", "estacion": "PIBJ", "domicilio": "Av. 5 de febrero 461 Parque Industrial Benito Juárez", "correo": "pibj@biodiesel.com", "productos": "Biodiesel A, Biodiesel B, Hidrobiodiesel,Biogas, Biobutanol, Bioetanol, Biometano, Diesel estándar, Diesel sintético", "contacto": "Diego Olvera", "telefono": "442 321 1257" },
+            { "id": "84321", "estacion": "El Mirador", "domicilio": "Prolongación Constituyentes Ote 351 El Mirador", "correo": "mirador@biodiesel.com", "productos": "Biodiesel A, Biodiesel B, Biogas, Diesel estándar, Diesel sintético", "contacto": "Erik Reyes", "telefono": "442 609 4312" },
+            { "id": "94321", "estacion": "Centro", "domicilio": "Av Constituyentes Ote 7 Centro", "correo": "centro@biodiesel.com", "productos": "Biodiesel A, Biodiesel B, Biogas", "contacto": "Javier Villazana", "telefono": "442 974 6974" }
+        ];
+
+        // Función para buscar diésel
+        function buscarDiesel() {
+            const input = document.getElementById('search-input').value.toLowerCase();
+            const resultadosDiv = document.getElementById('resultados');
+            resultadosDiv.innerHTML = ""; 
+
+            const resultados = dieselData.filter(diesel => 
+                diesel.id.toString() === input || diesel.nombre.toLowerCase() === input
+            );
+
+            if (resultados.length > 0) {
+                resultados.forEach(diesel => {
+                    const resultadoHTML = `
+                        <div class="resultado">
+                            <h3>${diesel.nombre} (ID: ${diesel.id})</h3>
+                            <p><strong>Tipo:</strong> ${diesel.tipoDiesel}</p>
+                            <p><strong>Descripción:</strong> ${diesel.descripcion}</p>
+                            <p><strong>Composición:</strong> ${diesel.composicionQuimica}</p>
+                            <p><strong>Precio por litro:</strong> $${diesel.precioPorLitro}</p>
+                        </div>
+                    `;
+                    resultadosDiv.innerHTML += resultadoHTML;
+                });
+            } else {
+                resultadosDiv.innerHTML = "<p>No se encontraron resultados.</p>";
+            }
+        }
+
+        // Función para buscar estaciones
+        function buscarEstaciones() {
+            const input = document.getElementById('search-estaciones').value.toLowerCase();
+            const resultadosDiv = document.getElementById('resultados-estaciones');
+            resultadosDiv.innerHTML = ""; 
+
+            const resultados = estacionesData.filter(estacion => 
+                estacion.id.toString() === input || estacion.estacion.toLowerCase() === input
+            );
+
+            if (resultados.length > 0) {
+                resultados.forEach(estacion => {
+                    const resultadoHTML = `
+                        <div class="resultado">
+                            <h3>${estacion.estacion} (ID: ${estacion.id})</h3>
+                            <p><strong>Domicilio:</strong> ${estacion.domicilio}</p>
+                            <p><strong>Correo:</strong> ${estacion.correo}</p>
+                            <p><strong>Productos:</strong> ${estacion.productos}</p>
+                            <p><strong>Contacto:</strong> ${estacion.contacto}</p>
+                            <p><strong>Teléfono:</strong> ${estacion.telefono}</p>
+                        </div>
+                    `;
+                    resultadosDiv.innerHTML += resultadoHTML;
+                });
+            } else {
+                resultadosDiv.innerHTML = "<p>No se encontraron resultados.</p>";
+            }
+        }
+    </script>
+</body>
+</html>
+

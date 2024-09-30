@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<estaciones xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Estaciones.xsd">
+    <ubicacion>
+        <id>12345</id>
+        <estacion>Amazacala</estacion>
+        <domicilio>Carretera estatal 500 # 1523 San Jose Amazacala</domicilio>
+        <correo>amazacala@biodiesel.com</correo>
+        <productos>Biodiesel A, Biodiesel B, Biogas</productos> 
+        <contacto>Damian Robles</contacto>
+        <telefono>442 123 4567</telefono>    
+    </ubicacion>
+    <ubicacion>
+        <id>12346</id>
+        <estacion>La Griega</estacion>
+        <domicilio>Carretera estatal 500 # 105 Parque Industrial Beta la griega</domicilio>
+        <correo>griega@biodiesel.com</correo>
+        <productos>Biodiesel A, Hidrobiodiesel, Biogas</productos> 
+        <contacto>Gerardo Gonzalez</contacto>
+        <telefono>442 123 4568</telefono>    
+    </ubicacion>
+    <ubicacion>
+        <id>12347</id>
+        <estacion>Chichimequillas</estacion>
+        <domicilio>Carretera estatal 540 # 955 Santa Maria Begoña</domicilio>
+        <correo>cheme@biodiesel.com</correo>
+        <productos>Biodiesel A, Biodiesel B, Hidrobiodiesel</productos> 
+        <contacto>Axel Gracia</contacto>
+        <telefono>442 123 4587</telefono>    
+    </ubicacion>
+    <ubicacion>
+        <id>12348</id>
+        <estacion>El Refugio</estacion>
+        <domicilio>Fray Junipero Serra 900 Km 6 El Regugio</domicilio>
+        <correo>elrefugio@biodiesel.com</correo>
+        <productos>Biodiesel A, Biodiesel B, Biogas</productos> 
+        <contacto>Damian Robles</contacto>
+        <telefono>442 123 4567</telefono>    
+    </ubicacion>
+    <ubicacion>
+        <id>12349</id>
+        <estacion>Juriquilla</estacion>
+        <domicilio>Av de las ciencias 2060 Juriquilla</domicilio>
+        <correo>juriquilla@biodiesel.com</correo>
+        <productos>Biodiesel A, Biodiesel B, Biogas, Bioetanol, Biometano</productos> 
+        <contacto>Cecilia Balderas</contacto>
+        <telefono>442 123 4577</telefono>    
+    </ubicacion>
+    <ubicacion>
+        <id>54321</id>
+        <estacion>PIBQ</estacion>
+        <domicilio>Carretera México - Querétaro 5D # 408 Parque Industrial Bernardo Quintana</domicilio>
+        <correo>pibq@biodiesel.com</correo>
+        <productos>Biodiesel A, Biodiesel B, Hidrobiodiesel,Biogas, Biobutanol, Bioetanol, Biometano, Diesel estándar, Diesel sintético</productos> 
+        <contacto>Leonardo Anaya</contacto>
+        <telefono>442 123 4577</telefono>    
+    </ubicacion>
+    <ubicacion>
+        <id>64321</id>
+        <estacion>PIB</estacion>
+        <domicilio>Carretera Querétaro - Celaya Km8 +800 Parque Industrial Balvanera</domicilio>
+        <correo>pib@biodiesel.com</correo>
+        <productos>Biodiesel A, Biodiesel B, Hidrobiodiesel,Biogas, Biobutanol, Bioetanol, Biometano, Diesel estándar, Diesel sintético</productos> 
+        <contacto>Margarita Reyes</contacto>
+        <telefono>442 321 1257</telefono>    
+    </ubicacion>
+    <ubicacion>
+        <id>74321</id>
+        <estacion>PIBJ</estacion>
+        <domicilio>Av. 5 de febrero 461 Parque Industrial Benito Juárez</domicilio>
+        <correo>pibj@biodiesel.com</correo>
+        <productos>Biodiesel A, Biodiesel B, Hidrobiodiesel,Biogas, Biobutanol, Bioetanol, Biometano, Diesel estándar, Diesel sintético</productos> 
+        <contacto>Diego Olvera</contacto>
+        <telefono>442 321 1257</telefono>    
+    </ubicacion>
+    <ubicacion>
+        <id>84321</id>
+        <estacion>El Mirador</estacion>
+        <domicilio>Prolongación Constituyentes Ote 351 El Mirador</domicilio>
+        <correo>mirador@biodiesel.com</correo>
+        <productos>Biodiesel A, Biodiesel B, Biogas, Diesel estándar, Diesel sintético</productos> 
+        <contacto>Erik Reyes</contacto>
+        <telefono>442 609 4312</telefono>    
+    </ubicacion>
+    <ubicacion>
+        <id>94321</id>
+        <estacion>Centro</estacion>
+        <domicilio>Av Constituyentes Ote 7 Centro</domicilio>
+        <correo>centro@biodiesel.com</correo>
+        <productos>Biodiesel A, Biodiesel B, Biogas</productos> 
+        <contacto>Javier Villazana</contacto>
+        <telefono>442 974 6974</telefono>    
+    </ubicacion>
+</estaciones>
